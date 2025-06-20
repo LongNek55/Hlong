@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Gửi Mẹ Yêu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: radial-gradient(circle, #fce4ec 20%, #f8bbd0 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+
+        .blur-effect {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(6px);
+            z-index: 1;
+        }
+
+        .glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2), transparent 70%);
+            animation: glowMove 8s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        @keyframes glowMove {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-10px, 10px); }
+        }
+
+        .content {
+            position: relative;
+            text-align: center;
+            color: #c2185b;
+            z-index: 3;
+        }
+
+        .title {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            margin-top: 30px;
+        }
+
+        .marquee-text {
+            display: inline-block;
+            font-size: 28px;
+            font-weight: bold;
+            color: #d81b60;
+            padding-left: 100%;
+            letter-spacing: 2px;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .date-time {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 18px;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+
+        .date-time i {
+            margin-right: 10px;
+            font-size: 22px;
+            color: #e91e63;
+        }
+
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="blur-effect"></div>
+    <div class="glow"></div>
+    <div class="content">
+        <div class="date-time">
+            <i class="fas fa-clock"></i>
+            <span id="current-time"></span>
+        </div>
+        <div class="title">🏡 Cả nhà chờ mẹ về 💗</div>
+        <div class="marquee-container">
+            <div class="marquee-text">
+                Mẹ nhớ ăn uống đầy đủ nhé ❤️ làm mau về nhà với bọn con ❤️ bọn con chờ mẹ về ❤️ khi nào mẹ về cả nhà mình sẽ làm lẩu to 😍
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                💖 Bố với con với chị yêu mẹ nhiều lắm ạ 💕 nhớ cẩn thận giữ sức khoẻ nhé mẹ
+            </div>
+        </div>
+    </div>
+    <audio autoplay loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-creativeminds.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        function updateTime() {
+            var now = new Date();
+            var hours = now.getHours().toString().padStart(2, '0');
+            var minutes = now.getMinutes().toString().padStart(2, '0');
+            var seconds = now.getSeconds().toString().padStart(2, '0');
+            var day = now.getDate().toString().padStart(2, '0');
+            var month = (now.getMonth() + 1).toString().padStart(2, '0');
+            var year = now.getFullYear();
+            
+            var timeString = `Ngày ${day}-${month}-${year} | ${hours}:${minutes}:${seconds}`;
+            document.getElementById('current-time').innerHTML = timeString;
+        }
+        
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>
